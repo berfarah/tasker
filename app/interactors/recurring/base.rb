@@ -49,14 +49,7 @@ module Recurring
         def schedule!(options = {})
           return unless Delayed::Worker.delay_jobs
           unschedule
-          options[:queue] = "#{options[:task].name}_#{options[:task].id}"
           new(options).schedule!(options)
-        end
-
-        # Quick shorthand for updates
-        def reschedule(options = {})
-          unschedule(options)
-          schedule(options)
         end
 
         def unschedule(options = {})

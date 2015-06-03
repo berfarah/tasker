@@ -5,6 +5,8 @@ h1
   small
     = link_to 'Edit', edit_task_path(@task)
 
+p This task is currently <strong>#{enabled @task.enabled}</strong>
+
 - unless @task.instances.empty?
   .row
     .col-md-12

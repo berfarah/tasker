@@ -31,8 +31,11 @@ var data_conditional = function () {
   });
 };
 
-$(document).ready(function () {
+var ready = (function () {
   data_conditional().each(function (i, element) {
     $(element).change(data_conditional);
   });
 });
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

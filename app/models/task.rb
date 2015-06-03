@@ -15,7 +15,7 @@ class Task < ActiveRecord::Base
   # Internal scripts need a file and an interval/scalar
   with_options if: :internal do
     validate :script_validation
-    validates :script, :scalar, presence: true
+    validates :scalar, presence: true
     validates :scalar, inclusion: { in: %w(days hours minutes seconds) }
     validates_format_of :interval, with: /\d+/
   end
@@ -42,8 +42,9 @@ class Task < ActiveRecord::Base
   private
 
     def update_scheduled_task
-      Recurring::Script.schedule(schedule_opts) if script_changed? && enabled
-      unschedule if enabled_changed? && !enabled
+      return unless enabled_changed? || script_changed?
+      return unschedule_task unless enabled
+      Recurring::Script.schedule(schedule_opts)
     end
 
     def unschedule_task
@@ -51,11 +52,11 @@ class Task < ActiveRecord::Base
     end
 
     def schedule_opts
-      { task: self, run_every: run_every, script: script.path }
+      { task: self, run_every: run_every, script: script.path, queue: "#{name}_#{id}" }
     end
 
     def script_validation
-      return if command_line_validation(script)
+      return if !script_changed? || command_line_validation(script)
       errors.add(:script, 'does not pass validation')
     end
 

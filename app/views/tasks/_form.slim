@@ -22,6 +22,11 @@
     '
     = f.select :scalar, %w(seconds minutes hours days), { selected: 'minutes' }, class: 'form-control'
 
+  .form-group.checkbox data-conditional='not:external'
+    = f.label :enabled do
+      = f.check_box :enabled
+      '  Enabled
+
   .form-group data-conditional='external'
     = f.label :ip
     = f.text_field :ip, class: 'form-control form-ip', placeholder: '172.29.106.123'

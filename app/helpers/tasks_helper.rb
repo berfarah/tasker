@@ -6,4 +6,8 @@ module TasksHelper
   def average(runtime)
     runtime.first
   end
+
+  def enabled(bool)
+    bool ? 'enabled' : 'disabled'
+  end
 end
