@@ -1,0 +1,7 @@
+h2
+  ' Log for #{link_to @log.instance.task.name, @log.instance.task}
+  small @ #{time_format @log.created_at}
+
+.row
+  p.lead.col-md-1: strong = @log.severity.upcase
+  p.lead.col-md-11 = @log.message

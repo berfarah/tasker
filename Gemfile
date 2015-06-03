@@ -6,6 +6,9 @@ gem 'rails', '4.2.1'
 gem 'sqlite3'
 
 gem 'bootstrap-sass'
+
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
 gem 'slim'
 # gem 'stylus'
 # Use SCSS for stylesheets

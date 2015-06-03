@@ -67,3 +67,18 @@
 .visible {
   @include animate_to;
 }
+
+.btn-inline {
+  @extend .btn-xs;
+  text-transform: uppercase;
+  margin-top: -5px;
+  padding: 3px 7px;
+}
+
+table .btn-inline {
+  margin-top: inherit;
+}
+
+.btn-delete {
+  @extend .text-danger;
+}

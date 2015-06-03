@@ -8,7 +8,7 @@ html
     .navbar-header = link_to 'Tasker', '/', class: 'navbar-brand'
     div
       ul.nav.navbar-nav.navbar-right
-        li = nav_link_to 'Tasks', tasks_path, 'tasks'
+        li = nav_link_to 'Tasks', tasks_path, ['tasks', 'instances']
         li = nav_link_to 'Logs', logs_path, 'logs'
 
   .container

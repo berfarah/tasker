@@ -11,6 +11,7 @@ module LogHelper
   end
 
   def time_format(time)
+    return unless time
     I18n.l time.localtime, format: :human
   end
 

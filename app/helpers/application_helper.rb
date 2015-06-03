@@ -1,8 +1,9 @@
 module ApplicationHelper
   def nav_link_to(text, path, controller)
-    active     = ' class="active"' if params[:action] == controller
-    active     = ' class="active"' if params[:controller] == controller
-    active     = ' class="active"' if params[:view] == controller
+    all = controller.is_a?(Array) ? controller : [controller]
+    active = ' class="active"' if [params[:action],
+                                   params[:controller],
+                                   params[:view]].any? { |x| all.include? x }
     "<li#{active} title=\"#{controller}\">#{link_to text, path}</li>".html_safe
   end
 

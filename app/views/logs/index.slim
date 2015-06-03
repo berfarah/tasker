@@ -1,16 +1,16 @@
-h2 Logs
+h2
+  ' Logs
+  = of_instance
 
 table.table
   thead: tr
     th Time
     th Severity
-    th Message
-    th colspan="2"
+    th colspan="2" Message
   tbody
     - @logs.each do |log|
       tr
         td = time_default log.created_at
         td = log.severity.upcase
         td = log.message
-        td = link_to 'Edit', edit_log_path(log)
-        td = link_to 'Destroy', log, method: :delete, data: { confirm: 'Are you sure?' }
+        td = link_to 'View', log

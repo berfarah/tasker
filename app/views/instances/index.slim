@@ -1,0 +1,19 @@
+h2
+  ' Instances
+
+table.table.table-hover
+  thead: tr
+    th Started at
+    th Finished at
+    th Duration
+    th Failed?
+    th Details
+  tbody
+  - @instances.reverse.each do |instance|
+    tr
+      td = time_format instance.started_at
+      td = time_format instance.finished_at
+      td = (instance.duration || 0).human_time
+      td = instance.failed
+      td = link_to 'Details', instance
+

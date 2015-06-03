@@ -1,0 +1,28 @@
+h1 Instance for #{link_to @instance.task.name, @instance.task}
+
+.row
+  .col-md-6
+    table.table
+      tr
+        td Started at
+        td = time_format @instance.started_at
+      tr
+        td Finished at
+        td = time_format @instance.finished_at
+      tr
+        td Duration
+        td = time_to_complete @instance.duration
+
+h3 Log
+table.table.table-hover.table-condensed
+  thead: tr
+    th Time
+    th Severity
+    th colspan="2" Message
+  tbody
+  - @instance.logs.reverse.each do |l|
+    tr class=severity_class(l.severity)
+      td = time_ago_in_words(l.created_at) << ' ago'
+      td = l.severity.capitalize
+      td = l.message
+      td = link_to 'View', l
