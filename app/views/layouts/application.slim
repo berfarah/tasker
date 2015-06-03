@@ -1,0 +1,18 @@
+html
+  title Tasker
+  = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = csrf_meta_tags
+
+  = console unless Rails.env == 'production'
+
+  nav.navbar.navbar-default.navbar-static-top:.container
+    .navbar-header: a.navbar-brand href="#" Tasker
+    div
+      ul.nav.navbar-nav.navbar-right
+        li = nav_link_to 'Tasks', tasks_path, 'tasks'
+        li = nav_link_to 'Logs', logs_path, 'logs'
+
+  .container
+    = flash_messages flash
+    = yield

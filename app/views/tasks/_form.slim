@@ -1,0 +1,29 @@
+= form_for @task do |f|
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control form-name'
+
+  .checkbox
+    = f.label :external do
+      = f.check_box :external
+      ' External script
+
+  .form-group data-conditional='not:external' class="form-inline"
+    label Script
+    br
+
+    = f.label :script, class: 'file-label' do
+      = f.file_field :script, class: 'form-control'
+
+  .form-group data-conditional='not:external' class="form-inline"
+    '  Run every
+    = f.number_field :interval, class: 'form-control form-number'
+    '
+    = f.select :scalar, %w(seconds minutes hours days), { selected: 'minutes' }, class: 'form-control'
+
+  .form-group data-conditional='external'
+    = f.label :ip
+    = f.text_field :ip, class: 'form-control form-ip', placeholder: '172.29.106.123'
+
+  .actions = f.submit class: 'btn btn-primary'
