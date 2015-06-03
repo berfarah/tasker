@@ -1,11 +1,13 @@
+require 'helpers/standard_deviation'
+
 # Tasks as internal or external scripts
 class Task < ActiveRecord::Base
   has_many :instances
   mount_uploader :script, ScriptUploader
 
   # Ensure the task is queued
-  after_create :schedule_task
-  after_update :reschedule_task
+  after_save :update_scheduled_task
+  after_destroy :unschedule_task
 
   validates :name, presence: true
   validates :external, inclusion: { in: [true, false] }
@@ -32,14 +34,24 @@ class Task < ActiveRecord::Base
     interval.send(scalar.to_sym)
   end
 
+  def runtime
+    last_10 = instances.last(10).map(&:duration)
+    [last_10.mean.ceil.human_time, last_10.standard_deviation]
+  end
+
   private
 
-    def schedule_task
-      Recurring::Script.schedule(self, run_every: run_every, script: script.path)
+    def update_scheduled_task
+      Recurring::Script.schedule(schedule_opts) if script_changed? && enabled
+      unschedule if enabled_changed? && !enabled
     end
 
-    def reschedule_task
-      Recurring::Script.reschedule(self, run_every: run_every, script: script.path)
+    def unschedule_task
+      Recurring::Script.unschedule(schedule_opts)
+    end
+
+    def schedule_opts
+      { task: self, run_every: run_every, script: script.path }
     end
 
     def script_validation

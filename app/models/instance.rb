@@ -7,8 +7,8 @@ class Instance < ActiveRecord::Base
   validate :not_negative_duration
 
   def duration
-    return 0 unless [finished_at, created_at].all?(&:present?)
-    @duration ||= (finished_at - created_at).ceil.human_time
+    return unless [created_at, finished_at].all?(&:present?)
+    @duration ||= (finished_at - created_at).ceil
   end
 
   def started_at
@@ -18,6 +18,7 @@ class Instance < ActiveRecord::Base
   private
 
     def not_negative_duration
-      errors.add(:finished_at, 'is before started_at') if duration < 0
+      errors.add(:finished_at, 'is before started_at') if duration &&
+                                                          duration < 0
     end
 end

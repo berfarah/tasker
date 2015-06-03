@@ -62,6 +62,10 @@ class TasksController < ApplicationController
     end
   end
 
+  def instances
+    @task = Task.find(params[:task_id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task

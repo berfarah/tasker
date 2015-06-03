@@ -7,14 +7,14 @@ module LogHelper
   end
 
   def time_to_complete(duration)
-    'Took ' << duration << ' to complete'
+    'Took ' << duration.human_time << ' to complete'
   end
 
   def time_format(time)
-    I18n.l time, format: :human
+    I18n.l time.localtime, format: :human
   end
 
   def time_default(time)
-    I18n.l time, format: :default
+    I18n.l time.localtime, format: :default
   end
 end
