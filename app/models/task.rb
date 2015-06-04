@@ -39,10 +39,14 @@ class Task < ActiveRecord::Base
     [last_10.mean.ceil.human_time, last_10.standard_deviation]
   end
 
+  def external_log(params)
+    (instances.last || instances.create).logs.new(params)
+  end
+
   private
 
     def update_scheduled_task
-      return unless enabled_changed? || script_changed?
+      return unless internal && (enabled_changed? || script_changed?)
       return unschedule_task unless enabled
       Recurring::Script.schedule(schedule_opts)
     end
@@ -52,7 +56,7 @@ class Task < ActiveRecord::Base
     end
 
     def schedule_opts
-      { task: self, run_every: run_every, script: script.path, queue: "#{name}_#{id}" }
+      { task: self, run_every: run_every, script: script.path, queue: "#{name.parameterize}_#{id}" }
     end
 
     def script_validation

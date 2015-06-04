@@ -1,5 +1,17 @@
+# Controller
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+
+  def external
+    not_authenticated unless (@task = Task.find_by_ip(request.ip))
+    log = @task.external_log(params.require(:log).permit(:severity, :message))
+
+    if log.save
+      render json: log.to_json
+    else
+      render json: { errors: log.errors }.to_json, status: :bad_request
+    end
+  end
 
   # GET /tasks
   # GET /tasks.json
@@ -67,6 +79,7 @@ class TasksController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
@@ -75,5 +88,9 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:name, :script, :external, :ip, :scalar, :interval, :enabled)
+    end
+
+    def not_authenticated
+      render json: 'Not an authenticated IP address'.to_json, status: :forbidden
     end
 end
