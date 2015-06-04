@@ -49,6 +49,6 @@ p This task is currently <strong>#{enabled @task.enabled}</strong>
       tbody
       - @task.instances.last.logs.reverse.each do |l|
         tr class=severity_class(l.severity)
-          td = time_ago_in_words(l.created_at) << ' ago'
+          td: time datetime="#{time_default l.created_at}" title="#{time_default l.created_at}" data-toggle="tooltip" data-placement="top" = time_ago_in_words(l.created_at) << ' ago'
           td = l.severity.capitalize
           td = l.message

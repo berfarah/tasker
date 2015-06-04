@@ -1,5 +1,5 @@
 en:
   time:
     formats:
-      default: '%Y-%m-%d %H:%M'
+      default: '%Y-%m-%d %H:%M:%S'
       human: '%H:%M on %B %e, %Y'

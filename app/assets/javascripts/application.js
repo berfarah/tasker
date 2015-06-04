@@ -36,6 +36,7 @@ var ready = (function () {
   data_conditional().each(function (i, element) {
     $(element).change(data_conditional);
   });
+  $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(document).ready(ready);
