@@ -1,0 +1,22 @@
+h2
+  ' Emails
+  = link_to 'New Email', new_email_path, class: 'btn btn-primary btn-inline'
+
+table.table
+  thead: tr
+    th Name
+    th Report
+    th Recipients
+    th colspan="2" Frequency
+
+  tbody
+    - @emails.each do |email|
+      tr
+        td = link_to email.name, email
+        td = email.report
+        td = email.recipients_array.join('; ')
+        td Every #{email.interval} #{email.scalar}
+        td style="width: 140px"
+          = link_to 'Edit', edit_email_path(email), class: 'btn btn-primary btn-inline'
+          '
+          = link_to 'Delete', email, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-inline'

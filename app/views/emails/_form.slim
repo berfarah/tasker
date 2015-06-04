@@ -1,0 +1,25 @@
+= form_for @email do |f|
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control form-name'
+
+  .form-group
+    = f.label :recipients
+    = f.text_area :recipients, class: 'form-control'
+
+  .form-group
+    = f.label :report
+    = f.select :report, %w(errors), {}, class: 'form-control'
+
+  .form-group class="form-inline"
+    '  Run every
+    = f.number_field :interval, class: 'form-control form-number'
+    '
+    = f.select :scalar, %w(seconds minutes hours days), {}, class: 'form-control'
+
+  .form-group.checkbox
+    = f.label :enabled do
+      = f.check_box :enabled
+      '  Enabled
+
+  .actions = f.submit class: 'btn btn-primary'

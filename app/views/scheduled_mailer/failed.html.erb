@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>There have been <%= @failed.length %> failures in the last hour:</h1>
+
+    <table>
+      <thead><tr>
+          <th>Task</th>
+          <th>Instance</th>
+          <th>Last Log</th>
+      </tr></thead>
+      <tbody><% @failed.each do |failure| %>
+        <tr>
+          <td><%= link_to failure.task.name, failure.task %></td>
+          <td><%= link_to failure.id, failure %></td>
+          <td><%= failure.logs.last.message %></td>
+        </tr>
+      <% end %></tbody>
+    </table>
+  </body>
+</html>

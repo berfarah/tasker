@@ -82,3 +82,7 @@ table .btn-inline {
 .btn-delete {
   @extend .text-danger;
 }
+
+.table-borderless td {
+  border: 0 !important;
+}

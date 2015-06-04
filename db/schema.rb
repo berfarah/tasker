@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603203941) do
+ActiveRecord::Schema.define(version: 20150604215719) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20150603203941) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+
+  create_table "emails", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "interval"
+    t.string   "scalar"
+    t.string   "recipients"
+    t.string   "report"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "enabled",    default: true
+  end
 
   create_table "instances", force: :cascade do |t|
     t.datetime "finished_at"

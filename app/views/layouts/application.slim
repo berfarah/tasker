@@ -9,6 +9,7 @@ html
     div
       ul.nav.navbar-nav.navbar-right
         li = nav_link_to 'Tasks', tasks_path, ['tasks', 'instances']
+        li = nav_link_to 'Emails', emails_path, 'emails'
         li = nav_link_to 'Logs', logs_path, 'logs'
 
   .container

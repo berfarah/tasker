@@ -1,0 +1,13 @@
+.page-header: h1
+  = @email.name
+  '
+  = link_to 'Edit', edit_email_path(@email), class: 'btn btn-inline btn-primary'
+
+p.lead
+  strong = @email.report
+  '  report is sent every
+  strong #{@email.interval} #{@email.scalar}
+  '  to
+  = @email.recipients_sentence
+
+p This email is currently <strong>#{enabled @email.enabled}</strong>

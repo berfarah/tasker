@@ -1,9 +1,9 @@
-h1 Instance for #{link_to @instance.task.name, @instance.task}
+.page-header: h1 Instance for #{link_to @instance.task.name, @instance.task}
 
 .row
   .col-md-6
     table.table
-      tr
+      tr class="table-borderless"
         td Started at
         td = time_format @instance.started_at
       tr

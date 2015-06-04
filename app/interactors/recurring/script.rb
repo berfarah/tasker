@@ -1,6 +1,6 @@
 module Recurring
   # Recurring scripts
-  class Script < Base
+  class Script < Tracked
     def initialize(options = {})
       super
       @script  = options.delete(:script)

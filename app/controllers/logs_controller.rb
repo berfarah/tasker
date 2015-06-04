@@ -8,6 +8,11 @@ class LogsController < ApplicationController
     @logs = @logs.where(instance: params[:instance_id]) if params[:instance_id]
   end
 
+  def errors
+    @logs = Log.errors.limit(50).reverse_order
+    render :index
+  end
+
   # GET /logs/1
   # GET /logs/1.json
   def show
