@@ -14,7 +14,7 @@ p This task is currently <strong>#{enabled @task.enabled}</strong>
     .col-md-6
       - instance = @task.instances.last
       table.table.table-condensed
-        thead: tr: th colspan="2" = link_to 'Last Instance', @task.instances.last
+        thead: tr: th colspan="2" Last Instance
         tr
           td Started at
           td = time_format instance.started_at
@@ -39,7 +39,7 @@ p This task is currently <strong>#{enabled @task.enabled}</strong>
           td = sd @task.runtime
 
   - unless @task.instances.last.logs.empty?
-    h4 Latest log
+    h4 Log
 
     table.table.table-hover.table-condensed
       thead: tr

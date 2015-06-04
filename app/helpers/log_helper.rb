@@ -7,6 +7,7 @@ module LogHelper
   end
 
   def time_to_complete(duration)
+    return unless duration
     'Took ' << duration.human_time << ' to complete'
   end
 

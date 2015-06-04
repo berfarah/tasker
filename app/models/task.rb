@@ -35,7 +35,8 @@ class Task < ActiveRecord::Base
   end
 
   def runtime
-    last_10 = instances.last(10).map(&:duration)
+    last_10 = instances.last(10).map(&:duration).compact
+    return last_10 if last_10.empty?
     [last_10.mean.ceil.human_time, last_10.standard_deviation]
   end
 
