@@ -1,8 +1,15 @@
 class ScheduledMailer < ApplicationMailer
   default from: 'noreply.tasker@bernardo.me'
 
-  def errors
-    # @errors = f
+  def fatal(recipients, error, subject = 'Fatal Error from Tasker')
+    @error = error
+    mail to: recipients, subject: subject
+  end
+
+  def errors(recipients, subject = 'Daily Error Log from Tasker')
+    @errors = Logs.where(created_at: 1.day.ago, severity: 'error')
+    return false if @errors.empty?
+    mail to: recipients, subject: subject << " (#{@errors.length})"
   end
 
   def failed(recipients, subject = 'Hourly Failed report from Tasker')
