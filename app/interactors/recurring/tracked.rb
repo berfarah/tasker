@@ -11,7 +11,7 @@ module Recurring
       run
       finish_instance
     rescue => e
-      ScheduledMailer.fatal('bfarah@walmart.com', e).deliver_now
+      ScheduledMailer.fatal('ber@bernardo.me', e).deliver_now
       raise e
     end
 

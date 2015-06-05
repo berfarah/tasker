@@ -1,0 +1,12 @@
+# Provide a hash here - can be generated via `rake secret`
+# SECRET_KEY_BASE=
+
+# Set your email settings (SMTP and Domain)
+# I'd recommend setting your password in the environment as well
+# EMAIL_SMTP=
+# EMAIL_DOMAIN=
+# EMAIL_FROM=
+
+# Set your desired postgres password. Both the username and password are optional.
+# POSTGRES_USER=
+# POSTGRES_PASSWORD=

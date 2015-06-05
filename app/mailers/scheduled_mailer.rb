@@ -1,6 +1,6 @@
 # Tasker's scheduled emailer tied to the model
 class ScheduledMailer < ApplicationMailer
-  default from: 'Tasker <noreply@walmart.com>'
+  default from: ENV['EMAIL_FROM']
 
   def fatal(recipients, error, subject = 'Fatal Error from Tasker')
     return false unless error.is_a? StandardError

@@ -19,11 +19,9 @@ Rails.application.configure do
   # Change me
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp-gw1.wal-mart.com',
+    address:              ENV['EMAIL_SMTP'],
     port:                 25,
-    domain:               'walmart.com',
-    # user_name:            '<username>',
-    # password:             '<password>',
+    domain:               ENV['EMAIL_DOMAIN'],
     authentication:       'plain',
     openssl_verify_mode:  'none',
     enable_starttls_auto: true  }

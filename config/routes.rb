@@ -7,8 +7,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'tasks/external' => 'tasks#external'
   resources :tasks, path: '/' do
+    collection do
+      post 'external'
+    end
+
     resources :instances, shallow: true, only: [:show, :index] do
       resources :logs, only: [:index]
     end
