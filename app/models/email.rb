@@ -1,5 +1,6 @@
 require 'tasks/base'
 
+# Email
 class Email < ActiveRecord::Base
   include Tasks::Base
 
@@ -8,7 +9,7 @@ class Email < ActiveRecord::Base
   after_destroy :unschedule
 
   def recipients_array
-    recipients.split(/\s*[,;]\s*/)
+    recipients.split(/\s*[\n,;]\s*/)
   end
 
   def recipients_sentence

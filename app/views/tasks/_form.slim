@@ -20,7 +20,7 @@
     '  Run every
     = f.number_field :interval, class: 'form-control form-number'
     '
-    = f.select :scalar, %w(seconds minutes hours days), { selected: 'minutes' }, class: 'form-control'
+    = f.select :scalar, %w(minutes hours days), {}, class: 'form-control'
 
   .form-group.checkbox data-conditional='not:external'
     = f.label :enabled do

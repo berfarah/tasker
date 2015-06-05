@@ -13,12 +13,25 @@ class LogsController < ApplicationController
     render :index
   end
 
+  def range
+    date = Date.parse(params[:date]).in_time_zone(-7)
+    @logs = Log.on_day(date)
+    @logs = @logs.where(severity: params[:filter]) if params[:filter]
+
+    render :index
+  end
+
   # GET /logs/1
   # GET /logs/1.json
   def show
   end
 
   private
+
+    def full_day(date)
+      date.beginning_of_day..date.end_of_day
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_log
       @log = Log.find(params[:id])

@@ -5,17 +5,17 @@
 
   .form-group
     = f.label :recipients
-    = f.text_area :recipients, class: 'form-control'
+    = f.text_area :recipients, class: 'form-control form-name'
 
   .form-group
     = f.label :report
-    = f.select :report, %w(errors), {}, class: 'form-control'
+    = f.select :report, %w(errors failed fatal), {}, class: 'form-control form-name'
 
   .form-group class="form-inline"
     '  Run every
     = f.number_field :interval, class: 'form-control form-number'
     '
-    = f.select :scalar, %w(seconds minutes hours days), {}, class: 'form-control'
+    = f.select :scalar, %w(minutes hours days), {}, class: 'form-control'
 
   .form-group.checkbox
     = f.label :enabled do

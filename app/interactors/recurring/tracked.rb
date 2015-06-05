@@ -1,7 +1,6 @@
 module Recurring
   # Default
   class Tracked < Base
-
     def initialize(options = {})
       @task = options.delete(:task).id
     end
@@ -11,6 +10,9 @@ module Recurring
       start_instance
       run
       finish_instance
+    rescue => e
+      ScheduledMailer.fatal('bfarah@walmart.com', e).deliver_now
+      raise e
     end
 
     private

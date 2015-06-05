@@ -8,8 +8,7 @@ module Recurring
     end
 
     def perform
-      ScheduledMailer.send(@report.to_sym, @recipients, @subject)
+      ScheduledMailer.send(@report.to_sym, @recipients, @subject).deliver_now
     end
-
   end
 end

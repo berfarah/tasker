@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :logs, only: [:index, :show] do
     collection do
       get 'errors'
+      get 'range/:date' => 'logs#range', as: :range
     end
   end
 
@@ -12,5 +13,4 @@ Rails.application.routes.draw do
       resources :logs, only: [:index]
     end
   end
-
 end

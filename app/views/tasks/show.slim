@@ -1,5 +1,6 @@
 .page-header: h1
-  = @task.name.capitalize << " "
+  = @task.name
+  '
   = link_to 'Edit', edit_task_path(@task), class: 'btn btn-primary btn-inline'
 
 p This task is currently <strong>#{enabled @task.enabled}</strong>
