@@ -1,6 +1,7 @@
 # Controller
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: :external
 
   def external
     return not_authenticated unless (@task = Task.find_by_ip(request.ip))
