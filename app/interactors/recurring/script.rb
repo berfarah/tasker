@@ -3,7 +3,7 @@ module Recurring
   class Script < Tracked
     def initialize(options = {})
       super
-      @script  = options.delete(:script)
+      @script = options.delete(:script)
     end
 
     private
@@ -14,7 +14,6 @@ module Recurring
           log :info,  out
           log :error, err
         end
-      rescue; @failed = true
       end
   end
 end

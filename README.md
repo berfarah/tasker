@@ -12,12 +12,21 @@ Run the following commands (in this order):
 # Ensure our volumes are built before doing anything
 docker-compose build
 
-# This is saved in a volume, so subsequent times of running this will be faster
-docker-compose run web sudo -u app bundle install
-
-# Set up the database
-docker-compose run web sudo -u app RAILS_ENV=your_environment rake db:setup
+# Run bundle install, purge files and set up the database
+docker-compose run web sudo -u app bin/setup
 
 # Compile the assets (only required for production)
-docker-compose run web sudo -u app RAILS_ENV=production rake assets:precompile
+docker run tasker_web_1 sudo -u app rake RAILS_ENV=production assets:precompile
+
+# Run the app
+docker-compose up web -d
+```
+
+# Backing up the database
+```shell
+# Backs up to backup/db_YYYY-MM-DD.sql
+bin/db_backup.rb
+
+# Add to crontab (defaults to 2AM)
+bin/db_backup.rb cron [hour]
 ```

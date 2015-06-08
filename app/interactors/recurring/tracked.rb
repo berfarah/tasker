@@ -8,11 +8,8 @@ module Recurring
     # Delayed hooks into this
     def perform
       start_instance
-      run
+      begin; run; rescue; @failed = true; end
       finish_instance
-    rescue => e
-      ScheduledMailer.fatal('ber@bernardo.me', e).deliver_now
-      raise e
     end
 
     private
@@ -23,12 +20,15 @@ module Recurring
       end
 
       # Run our task
-      def run; end
+      def run
+        puts "# Usage:\nclass MyClass < Tracked\n"\
+             "  def run\n    do something\n  end\nend"
+      end
 
       # Track when our instance ended/failed
       def finish_instance
         @instance.finished_at = Time.now
-        @instance.failed = @failed if @failed
+        @failed && @instance.failed
         @instance.save!
       end
 

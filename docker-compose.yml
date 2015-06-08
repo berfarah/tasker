@@ -15,6 +15,7 @@ web:
   - data
   environment:
   - PASSENGER_APP_ENV=development
+  - RAILS_ENV=development
   env_file: ./docker/.env
 data:
   build: ./docker/data
